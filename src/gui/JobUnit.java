@@ -4,54 +4,49 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
- class JobUnit extends JPanel implements ListSelectionListener {
-	private static ListCellRenderer render = new MultiLineCellRenderer();
+import javax.swing.table.TableCellRenderer;
+
+import java.util.List;
+
+import model.JobUnitModel;
+import core.Util;
+
+ class JobUnit extends JPanel {
+
+	private static Object[] colName = { "SQL Expression" };
 
 	private JScrollPane pane;
-	private JList list;
+	private JTable table;
+	private JTextArea result;
 
 
-	public JobUnit(AbstractListModel listModel) {
-		super.setLayout(new GridLayout(0, 1));
+	public JobUnit(JobUnitModel model) {
+		super.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-		this.list = new JList(listModel);
-		this.pane = new JScrollPane(list);
+		//table
+		this.table = new JTable(model);
+		
+		//pane
+		this.pane = new JScrollPane(table);
+		pane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-		list.setCellRenderer(render);
-        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        list.setSelectedIndex(0);
-        list.addListSelectionListener(this);
+		//result areaa
+		this.result = new JTextArea();
+		result.setEditable(false);
+		result.setLineWrap(true);
 
 		super.add(this.pane);
-	}
-
-	@Override
-	public void valueChanged(ListSelectionEvent e) {
-		//TODO: do nothing
+		super.add(new JSeparator(SwingConstants.HORIZONTAL));
+		super.add(result);
 	}
 
 
 
-	private static class MultiLineCellRenderer 
-		implements ListCellRenderer {
+	public void setResultText(String text) {
+		this.result.setText(text);
+	}	
 
-		@Override
-		public Component getListCellRendererComponent(
-			JList list, Object value, 
-			int index, boolean isSelected, boolean cellHasFocus
-		) {
-			JInput res = new JInput(value.toString());
-			res.setLineWrap(true);
-			
 
-			if(cellHasFocus && isSelected) {
-				res.setEditable(true);	
-			}
-
-			return res;
-		}
-
-	}	//class MultiLineCellRenderer
 
 
 }	//class JobUnit

@@ -3,6 +3,7 @@ package gui;
 import java.awt.*;
 import javax.swing.*;
 
+import model.JobUnitModel;
 
 public class MainFrame extends JFrame {
 
@@ -15,10 +16,14 @@ public class MainFrame extends JFrame {
 
 	public static void main(String[] args) {
 		final MainFrame frame = new MainFrame();
-		final DefaultListModel model = new DefaultListModel();
-		model.addElement("hhello world my anme is david \n good nmorning \n ok u winaslkfjalsdkfjalksdjflkasdjflkasdjfello world my anme is david \n good nmorning \n ok u winaslkfjalsdkfjalksdjflkasdjflkasdjf");
-		model.addElement("world");
+		final String[] data = { "hello world", "good mirning", "ok u win" , " good software" };
+		final JobUnitModel list = new JobUnitModel();
+		for(String s : data) {
+			list.add(s);
+		}
 
-		frame.getContentPane().add(BorderLayout.CENTER, new JobUnit(model));
+		frame.getContentPane().add(BorderLayout.CENTER, new JobUnit(list));
+		frame.revalidate();
+		frame.repaint();
 	}
 }
