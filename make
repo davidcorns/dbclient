@@ -1,5 +1,5 @@
 #!/bin/bash
 
-javac src/DbClient.java -d ./target
+javac `find src -name *.java` -d ./target
 
 

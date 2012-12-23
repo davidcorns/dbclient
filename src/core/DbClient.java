@@ -1,6 +1,9 @@
+package core;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.io.DataInputStream;
+
 
 public class DbClient {
 	private Connection conn;
